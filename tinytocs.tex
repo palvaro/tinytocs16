@@ -1,5 +1,5 @@
-\documentclass[10pt]{article}
-\usepackage[letterpaper,scale=0.7]{geometry}
+\documentclass{tinytocs}
+%\usepackage[letterpaper,scale=0.7]{geometry}
 
 \usepackage[sorting=ydnt, backend=bibtex,maxnames=99]{biblatex}
 
@@ -31,9 +31,15 @@ UC Santa Cruz\\
 
 \section{Abstract}
 
-Fault tolerance is redundancy.  Prior work on targeted fault injection leverages data lineage to collect evidence of redundancy from program traces and led to a natural decision problem: could some set of faults in the execution have prevented a known good system outcome?   It does so by converting the lineage (a fine-grained explanation of the sequence of computational steps that produced the outcome) into a SAT formula whose satisfying models represent such fault sets.  This approach has proven successful finding bugs in both low-level protocols and large-scale systems\cite{molly}.
+Fault tolerance is redundancy.  Prior work on lineage-driven fault injection leverages data lineage to collect 
+evidence of redundancy from program traces,
+lead to a natural decision problem: could some set of faults in the execution have prevented a known good system outcome?   
+It constructs the problem by converting the lineage (a fine-grained explanation of the sequence of computational steps 
+that produced the outcome) into a SAT formula whose satisfying models represent such fault sets, and ultimately exploring
+their consequences via fault injection.  
+This approach has proven successful finding bugs in both low-level protocols and large-scale systems\cite{molly}.
 
-However, the space of possible faults is often enormous, and the SAT formulation does not prioritize the space of fault combinations (not all fault sets are equally good). Moreover, bounds on execution length and number of failures must be given a priori to construct the formula, resulting in a large parameter space.
+However, the space of possible faults is often enormous, and the SAT formulation does not prioritize the space of fault combinations (in which not all fault sets are equally likely). Moreover, bounds on execution length and number of failures must be given a priori to construct the formula, resulting in a large parameter space that must be swept.
 
 The paper describes how the problem of finding the smallest set of faults that could invalidate support for a good outcome can be posed instead as an optimization problem, whose solutions both determine the next fault set that should be explored and provide an intuitive measure of the fault-tolerance of a system.
 
